@@ -31,6 +31,37 @@ template <typename T> class bb{
 		for(int i = 0; i < size; i++)cout << v[i] << " ";
 	       cout << endl;	
 	}
+
+	void swap(vector<T> &a, int x, int y){
+		int aux = a[x];
+		a[x] = a[y];
+		a[y] = aux;
+	}
+
+	int partition(vector<T> &a, int ini, int fin){
+		int p = a[ini];
+		int i = ini;
+		int j = fin;
+	
+		do{
+			for(int k = 0; a[i] <= p && i < fin;k++)i++;
+			for(int k = 0; a[j] >= p && j > ini; k++)j--;
+			swap(a,i,j);
+		}while(i<j);
+		swap(a,i,j);
+		swap(a,ini,j);
+		return j;
+	}
+
+	void quickSort(vector<T> &a, int ini, int fin){
+		int tam = fin - ini + 1;
+		if(tam > 1){
+			int s = partition(a,ini,fin);
+			//print_arr(a,tam);
+			quickSort(a,ini,s);
+			quickSort(a,s+1,fin);
+		}else return;
+	}
 };
 
 #endif

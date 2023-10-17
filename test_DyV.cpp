@@ -34,5 +34,14 @@ int main() {
 	x = clase1.BusquedaBinaria_INV(3,a_inv,0,size-1);
 	cout << "Elemento 3 tipo int encontrado en pos " << x << endl;
 
+	cout << "QUICKSORT PRUEBA" << endl << endl;
+	vector<int>vect ={6,4,2,3,8,9};
+	cout << "vector a ordenar:" << endl;
+	clase1.print(vect,size);
+	clase1.quickSort(vect,0,size-1);
+	cout << "vector ordenado: " << endl;
+	clase1.print(vect,size); 
+
+
 	return 0;
 }
