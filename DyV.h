@@ -18,6 +18,15 @@ template <typename T> class bb{
 		else return BusquedaBinaria(x,v,medio+1,fin);
 	}
 
+	T BusquedaBinaria_INV(T x, vector<T>& v, int ini, int fin){
+		if(ini > fin){ cout << "No se encuentra en el array\n"; return -1;}
+		
+		int medio = (ini+fin)/2;
+		if(v[medio] == x)return medio;
+		else if(v[medio] > x)return BusquedaBinaria_INV(x,v,medio+1,fin);
+		else return BusquedaBinaria_INV(x,v,ini,medio-1);
+	}
+
 	void print(vector<T> &v, int size){
 		for(int i = 0; i < size; i++)cout << v[i] << " ";
 	       cout << endl;	
