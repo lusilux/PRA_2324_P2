@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include <vector>
+#include <stdlib.h>
+#include <time.h>
 
 using namespace std;
 
@@ -38,8 +40,9 @@ template <typename T> class bb{
 		a[y] = aux;
 	}
 
-	int partition(vector<T> &a, int ini, int fin){
-		int p = a[ini];
+	//Partition aprendida en clase de teoría
+	int partition_ini(vector<T> &a, int ini, int fin){
+		T p = a[ini];
 		int i = ini;
 		int j = fin;
 	
@@ -53,13 +56,89 @@ template <typename T> class bb{
 		return j;
 	}
 
-	void quickSort(vector<T> &a, int ini, int fin){
+	//Partition aprendida en clase de práctica
+	int partition_fin(vector<T> &a, int ini, int fin){
+		T p = a[fin];
+		int i = ini;
+		int j;
+		for(j = ini; j < fin; j++){
+			if(a[j] <= p){
+				swap(a,i,j);
+				i++;
+			} 
+		}
+		swap(a,i,fin);
+		return i;
+	} 
+
+	int partition_mid(vector<T> &a, int ini, int fin){
+		int mid = (ini + fin)/2;
+		T p = a[mid];
+		int i = ini;
+		int j;
+		for(j = ini; j <= fin; j++){
+			if(a[j] < p){
+				swap(a,i,j);
+				i++;
+			} 
+		}
+		swap(a,i,mid);
+		return i;
+	}
+
+	int partition_rand(vector<T> &a, int ini, int fin){
+		int rnd = ini + rand() % (fin+1-ini);
+		T p = a[rnd];
+		int i = ini;
+		int j;
+		for(j = ini; j <= fin; j++){
+			if(a[j] < p){
+				swap(a,i,j);
+				if(i == rnd)rnd = j;
+				i++;
+			} 
+		}
+		swap(a,i,rnd);
+		return i;
+	}
+
+	void quickSort_ini(vector<T> &a, int ini, int fin){
 		int tam = fin - ini + 1;
 		if(tam > 1){
-			int s = partition(a,ini,fin);
-			//print_arr(a,tam);
-			quickSort(a,ini,s);
-			quickSort(a,s+1,fin);
+			int s = partition_ini(a,ini,fin);
+
+			quickSort_ini(a,ini,s);
+			quickSort_ini(a,s+1,fin);
+		}else return;
+	}
+
+	void quickSort_fin(vector<T> &a, int ini, int fin){
+		int tam = fin - ini + 1;
+		if(tam > 1){
+			int s = partition_fin(a,ini,fin);
+			//print(a,tam);
+			quickSort_fin(a,ini,s-1);
+			quickSort_fin(a,s+1,fin);
+		}else return;
+	}
+
+	void quickSort_mid(vector<T> &a, int ini, int fin){
+		int tam = fin - ini + 1;
+		if(tam > 1){
+			int s = partition_mid(a,ini,fin);
+			//print(a,tam);
+			quickSort_mid(a,ini,s-1);
+			quickSort_mid(a,s+1,fin);
+		}else return;
+	}
+
+	void quickSort_rand(vector<T> &a, int ini, int fin){
+		int tam = fin - ini + 1;
+		if(tam > 1){
+			int s = partition_rand(a,ini,fin);
+			//print(a,tam);
+			quickSort_rand(a,ini,s-1);
+			quickSort_rand(a,s+1,fin);
 		}else return;
 	}
 };
