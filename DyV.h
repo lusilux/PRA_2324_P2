@@ -41,6 +41,7 @@ template <typename T> class bb{
 	}
 
 	//Partition aprendida en clase de teoría
+	/*
 	int partition_ini(vector<T> &a, int ini, int fin){
 		T p = a[ini];
 		int i = ini;
@@ -54,6 +55,21 @@ template <typename T> class bb{
 		swap(a,i,j);
 		swap(a,ini,j);
 		return j;
+	}*/
+
+	int partition_ini(vector<T> &a, int ini, int fin){
+		T p = a[ini];
+		int i = ini;
+		int j;
+		for(j = ini; j <= fin; j++){
+			if(a[j] < p){
+				swap(a,i,j);
+				if(i == ini)ini = j;
+				i++;
+			} 
+		}
+		swap(a,i,ini);
+		return i;
 	}
 
 	//Partition aprendida en clase de práctica
@@ -72,13 +88,14 @@ template <typename T> class bb{
 	} 
 
 	int partition_mid(vector<T> &a, int ini, int fin){
-		int mid = (ini + fin)/2;
+		int mid = (ini + (fin-ini))/2;
 		T p = a[mid];
 		int i = ini;
 		int j;
 		for(j = ini; j <= fin; j++){
 			if(a[j] < p){
 				swap(a,i,j);
+				if(i == mid) mid = j;
 				i++;
 			} 
 		}
@@ -106,7 +123,7 @@ template <typename T> class bb{
 		int tam = fin - ini + 1;
 		if(tam > 1){
 			int s = partition_ini(a,ini,fin);
-
+			
 			quickSort_ini(a,ini,s);
 			quickSort_ini(a,s+1,fin);
 		}else return;

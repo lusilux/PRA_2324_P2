@@ -54,6 +54,7 @@ int main() {
 	cout << "**QuickSort con pivote en ultimo elemento" << endl;
 
 	vector<int>vect ={6,4,2,3,8,9};
+	
 	cout << "**Vector a ordenar:" << endl;
 	clase1.print(vect,size);
 	auto start = chrono::system_clock::now();
@@ -67,6 +68,7 @@ int main() {
 	cout <<endl << "**QuickSort con pivote en primer elemento" << endl;
 
 	vect ={6,4,2,3,8,9};
+	
 	cout << "**Vector a ordenar:" << endl;
 	clase1.print(vect,size);
 	start = chrono::system_clock::now();
@@ -81,6 +83,7 @@ int main() {
 
 	vect ={6,4,2,3,8,9};
 	//vect ={9,9,2,3,1,5};
+	
 	cout << "**Vector a ordenar:" << endl;
 	clase1.print(vect,size);
 	start = chrono::system_clock::now();
